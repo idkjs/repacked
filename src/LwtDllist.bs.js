@@ -6,7 +6,7 @@ var Caml_option = require("bs-platform/lib/js/caml_option.js");
 var Caml_exceptions = require("bs-platform/lib/js/caml_exceptions.js");
 var Caml_js_exceptions = require("bs-platform/lib/js/caml_js_exceptions.js");
 
-var Empty = Caml_exceptions.create("LwtDllist-Repacked.Empty");
+var Empty = /* @__PURE__ */Caml_exceptions.create("LwtDllist-Repacked.Empty");
 
 function get(node) {
   return node.node_data;

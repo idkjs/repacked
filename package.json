@@ -2,20 +2,19 @@
   "name": "repacked",
   "version": "0.1.0",
   "scripts": {
+    "test": "node src/Demo.bs.js",
     "build": "bsb -make-world",
     "start": "bsb -make-world -w",
     "clean": "bsb -clean-world",
     "refmt": "find src -name '*.re*' | xargs node_modules/.bin/refmt --in-place",
     "refmt2": "find src -name '*.re*' | xargs node_modules/bs-platform/lib/refmt.exe --in-place"
   },
-  "keywords": [
-    "BuckleScript"
-  ],
+  "keywords": [ "BuckleScript" ],
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "@leeor/rescript-ppx-let": "^0.1.13",
-    "bs-platform": "^8.4.2",
+    "bs-platform": "^9.0.2",
     "reason-repacked": "^3.6.0-30fb3f55"
   }
 }

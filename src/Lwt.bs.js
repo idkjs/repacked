@@ -17,7 +17,7 @@ var CamlinternalLazy = require("bs-platform/lib/js/camlinternalLazy.js");
 var Caml_js_exceptions = require("bs-platform/lib/js/caml_js_exceptions.js");
 var LwtDllist$Repacked = require("./LwtDllist.bs.js");
 
-var Empty = Caml_exceptions.create("Lwt-Repacked.LwtSeq.Empty");
+var Empty = /* @__PURE__ */Caml_exceptions.create("Lwt-Repacked.LwtSeq.Empty");
 
 function get(node) {
   return node.node_data;
@@ -693,7 +693,7 @@ var async_exception_hook = {
   contents: (function (exn) {
       Pervasives.prerr_string("Fatal error: exception ");
       Pervasives.prerr_string(Printexc.to_string(exn));
-      Pervasives.prerr_char(/* "\n" */10);
+      Pervasives.prerr_char(/* '\n' */10);
       Printexc.print_backtrace(Pervasives.stderr);
       Pervasives.flush(Pervasives.stderr);
       return Pervasives.exit(2);
@@ -709,7 +709,7 @@ function handle_with_async_exception_hook(f, v) {
   }
 }
 
-var Canceled = Caml_exceptions.create("Lwt-Repacked.Resolution_loop.Canceled");
+var Canceled = /* @__PURE__ */Caml_exceptions.create("Lwt-Repacked.Resolution_loop.Canceled");
 
 function run_callbacks(callbacks, result) {
   var run_cancel_callbacks = function (fs) {

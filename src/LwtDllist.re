@@ -4,28 +4,28 @@ exception Empty;
 
 type t('a) = {
   mutable prev: t('a),
-  mutable next: t('a)
+  mutable next: t('a),
 };
 
 type node('a) = {
   mutable node_prev: t('a),
   mutable node_next: t('a),
   mutable node_data: 'a,
-  mutable node_active: bool
+  mutable node_active: bool,
 };
 
-external seq_of_node : node('a) => t('a) = "%identity";
+external seq_of_node: node('a) => t('a) = "%identity";
 
-external node_of_seq : t('a) => node('a) = "%identity";
+external node_of_seq: t('a) => node('a) = "%identity";
 
 /* +-----------------------------------------------------------------+
    | Operations on nodes                                             |
    +-----------------------------------------------------------------+ */
-let get = (node) => node.node_data;
+let get = node => node.node_data;
 
 let set = (node, data) => node.node_data = data;
 
-let remove = (node) =>
+let remove = node =>
   if (node.node_active) {
     node.node_active = false;
     let seq = seq_of_node(node);
@@ -41,9 +41,9 @@ let create = () => {
   seq;
 };
 
-let is_empty = (seq) => seq.next === seq;
+let is_empty = seq => seq.next === seq;
 
-let length = (seq) => {
+let length = seq => {
   let rec loop = (curr, len) =>
     if (curr === seq) {
       len;
@@ -55,20 +55,30 @@ let length = (seq) => {
 };
 
 let add_l = (data, seq) => {
-  let node = {node_prev: seq, node_next: seq.next, node_data: data, node_active: true};
+  let node = {
+    node_prev: seq,
+    node_next: seq.next,
+    node_data: data,
+    node_active: true,
+  };
   seq.next.prev = seq_of_node(node);
   seq.next = seq_of_node(node);
   node;
 };
 
 let add_r = (data, seq) => {
-  let node = {node_prev: seq.prev, node_next: seq, node_data: data, node_active: true};
+  let node = {
+    node_prev: seq.prev,
+    node_next: seq,
+    node_data: data,
+    node_active: true,
+  };
   seq.prev.next = seq_of_node(node);
   seq.prev = seq_of_node(node);
   node;
 };
 
-let take_l = (seq) =>
+let take_l = seq =>
   if (is_empty(seq)) {
     raise(Empty);
   } else {
@@ -76,11 +86,11 @@ let take_l = (seq) =>
     remove(node);
     node.node_data;
   };
-let clear = (seq) => {
+let clear = seq => {
   seq.prev = seq;
   seq.next = seq;
 };
-let take_r = (seq) =>
+let take_r = seq =>
   if (is_empty(seq)) {
     raise(Empty);
   } else {
@@ -89,7 +99,7 @@ let take_r = (seq) =>
     node.node_data;
   };
 
-let take_opt_l = (seq) =>
+let take_opt_l = seq =>
   if (is_empty(seq)) {
     None;
   } else {
@@ -98,7 +108,7 @@ let take_opt_l = (seq) =>
     Some(node.node_data);
   };
 
-let take_opt_r = (seq) =>
+let take_opt_r = seq =>
   if (is_empty(seq)) {
     None;
   } else {
@@ -126,7 +136,7 @@ let transfer_r = (s1, s2) => {
 };
 
 let iter_l = (f, seq) => {
-  let rec loop = (curr) =>
+  let rec loop = curr =>
     if (curr !== seq) {
       let node = node_of_seq(curr);
       if (node.node_active) {
@@ -138,7 +148,7 @@ let iter_l = (f, seq) => {
 };
 
 let iter_r = (f, seq) => {
-  let rec loop = (curr) =>
+  let rec loop = curr =>
     if (curr !== seq) {
       let node = node_of_seq(curr);
       if (node.node_active) {
@@ -150,7 +160,7 @@ let iter_r = (f, seq) => {
 };
 
 let iter_node_l = (f, seq) => {
-  let rec loop = (curr) =>
+  let rec loop = curr =>
     if (curr !== seq) {
       let node = node_of_seq(curr);
       if (node.node_active) {
@@ -162,7 +172,7 @@ let iter_node_l = (f, seq) => {
 };
 
 let iter_node_r = (f, seq) => {
-  let rec loop = (curr) =>
+  let rec loop = curr =>
     if (curr !== seq) {
       let node = node_of_seq(curr);
       if (node.node_active) {
@@ -204,7 +214,7 @@ let fold_r = (f, seq, acc) => {
 };
 
 let find_node_l = (f, seq) => {
-  let rec loop = (curr) =>
+  let rec loop = curr =>
     if (curr !== seq) {
       let node = node_of_seq(curr);
       if (node.node_active) {
@@ -223,7 +233,7 @@ let find_node_l = (f, seq) => {
 };
 
 let find_node_r = (f, seq) => {
-  let rec loop = (curr) =>
+  let rec loop = curr =>
     if (curr !== seq) {
       let node = node_of_seq(curr);
       if (node.node_active) {
@@ -242,11 +252,11 @@ let find_node_r = (f, seq) => {
 };
 
 let find_node_opt_l = (f, seq) =>
-  try (Some(find_node_l(f, seq))) {
+  try(Some(find_node_l(f, seq))) {
   | Not_found => None
   };
 
 let find_node_opt_r = (f, seq) =>
-  try (Some(find_node_r(f, seq))) {
+  try(Some(find_node_r(f, seq))) {
   | Not_found => None
   };
