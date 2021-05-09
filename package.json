@@ -11,10 +11,5 @@
   },
   "keywords": [ "BuckleScript" ],
   "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "@leeor/rescript-ppx-let": "^0.1.13",
-    "bs-platform": "^9.0.2",
-    "reason-repacked": "^3.6.0-30fb3f55"
-  }
+  "license": "MIT"
 }

@@ -2,5 +2,14 @@
 .merlin
 .bsb.lock
 npm-debug.log
-/lib/bs/
+
 /node_modules/
+.cache
+*.swp
+dist/
+lib/
+*.bs.js
+_esy
+_build/
+.melange.eobjs
+yarn.lock

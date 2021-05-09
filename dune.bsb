@@ -1,0 +1,29 @@
+;;;;{BSB GENERATED: NO EDIT
+(subdir ./src
+(rule
+(targets  Demo.ast)
+ (deps (:inputs  Demo.re) )
+(action
+ (run bsc  -w a  -absname -bs-ast -o %{targets} %{inputs}))
+(enabled_if (= %{ocaml_version} "4.12.0")) )
+ (rule
+(targets  Demo-Repacked.cmj Demo-Repacked.cmi Demo-Repacked.cmt Demo.bs.js)
+ (mode (promote (until-clean) (only Demo.bs.js)))(deps (:inputs  Demo.ast)  (:ast_deps .././src/Demo.ast ) ../bsconfig.json ../.melange.eobjs/Repacked.cmi)
+(action
+ (progn (dynamic-run bsb_helper -bs-ns Repacked -root /Users/mando/Github/repacked -cwd ./src %{ast_deps}) (run bsc -bs-ns Repacked -bs-re-out -I . -I ../.melange.eobjs   -w a -bs-package-name repacked -bs-package-output commonjs:./src:.bs.js -o Demo-Repacked.cmj %{inputs})))
+(enabled_if (= %{ocaml_version} "4.12.0")) )
+ 
+(alias (name bsb_world)(deps  Demo.bs.js)
+(enabled_if (= %{ocaml_version} "4.12.0"))))
+
+(subdir ./.melange.eobjs(rule
+(targets  Repacked.cmi)
+ (deps (:inputs  Repacked.mlmap) )
+(action (run bsc -w -49 -color always -no-alias-deps %{inputs}))
+(enabled_if (= %{ocaml_version} "4.12.0")) )
+ )
+(subdir .melange.eobjs)
+
+(data_only_dirs node_modules .melange.eobjs)
+(alias (name bsb_world))
+;;;;BSB GENERATED: NO EDIT}

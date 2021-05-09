@@ -10,15 +10,9 @@
     "in-source": true
   },
   "suffix": ".bs.js",
-  "bs-dependencies": [
-
-  ],
+  "bs-dependencies": [],
   "warnings": {
     "error" : "+101"
   },
-  "namespace": true,
-  "ppx-flags": [
-        [ "@leeor/rescript-ppx-let/ppx.exe", "-as-ppx" ] 
-    ],
- "refmt": "./node_modules/.bin/refmt"
+  "namespace": true
 }

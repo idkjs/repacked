@@ -1,19 +1,5 @@
 Js.log("Hello, ReScript!");
-// open Lwt.Syntax;
-// let get_input = (input: int) =>
-//   switch (input) {
-//   | 1 => 1
-//   | 2 => 2
-//   | _ => 0
-//   };
-// let x = {
-//   let a = get_input(1);
-//   let b = get_input(2);
-//   a + b;
-// };
-// let x = get_input(1)
 
-// Js.log(x)
 let x = 10;
 let a = Some(10);
 let b = Some(3);
